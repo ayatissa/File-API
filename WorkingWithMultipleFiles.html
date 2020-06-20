@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lange ="en">
+<head>
+<meta charset="UTF-8">
+<title>Using the File Input </title>
+<link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+<h1> handling Multiple Files </h1>
+<form action="">
+    <label>Select a File :  </label>
+    <input type="file" name="files" id="fileElem" multiple="multiple" />
+
+   <div id="filedata"> </div>
+</form>
+
+</body>
+<script>
+function init(){
+   //check to see if this browser supports the file APIs we need
+ var bHaveFileAPI = (window.File && window.FileReader);
+
+   if(!bHaveFileAPI){
+
+       alert("this browser does't support the file API ");
+       return ;
+   }
+   //if the browser supports the necessary features , enable the UI 
+   document.getElementById("fileElem").addEventListener("change",onFileChanged);
+
+}
+
+//when the user selects a file , this function will be called 
+function onFileChanged(theEvt){
+     var files = theEvt.target.files;
+     var totalBytes = 0;
+     for (var i=0; i < files.length ; i++){
+         //display the file data 
+         var fileInfo = "<p> file name :" + files[i].name +  " ; size :" + files[i].size + "; type :" + files[i].type +"</p>";
+         totalBytes+=files[i].size;
+         document.getElementById("filedata").innerHTML += fileInfo;
+     }
+
+     document.getElementById("filedata").innerHTML += "<p> Total of " + files.length + "files , " + totalBytes + "bytes. ";
+     
+    
+}
+window.addEventListener("load",init);
+</script>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lange ="en">
+<head>
+<meta charset="UTF-8">
+<title>Using Drag and Drop </title>
+<link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+<h1> Using Drag and Drop</h1>
+ <p>Drop files here : </p>
+ <div class="fileDrop" id="fileDrop"></div>
+ <p>File Information :</p>
+ <div id="filedata"></div>
+
+</body>
+<script>
+function init(){
+   //check to see if this browser supports the file APIs we need
+ var bHaveFileAPI = (window.File && window.FileReader);
+
+   if(!bHaveFileAPI){
+
+       alert("this browser does't support the file API ");
+       return ;
+   }
+  document.getElementById("fileDrop").addEventListener("drop",onFileDropped);
+  document.getElementById("fileDrop").addEventListener("dragover",onDragOver);
+}
+
+//when the user selects a file , this function will be called 
+function onDragOver(theEvt){
+    theEvt.stopPropagation();
+    theEvt.preventDefault();
+
+}
+
+function onFileDropped(theEvt){
+    theEvt.stopPropagation();
+    theEvt.preventDefault(); 
+    var files =theEvt.dataTransfer.files;
+    var totalBytes=0;
+    
+    document.getElementById("filedata").innerHTML ="";
+    for (var i=0; i < files.length ; i++){
+         //display the file data 
+         var fileInfo = "<p> file name :" + files[i].name +  " ; size :" + files[i].size + "; type :" + files[i].type +"</p>";
+         totalBytes+=files[i].size;
+         document.getElementById("filedata").innerHTML += fileInfo;
+     }
+
+     document.getElementById("filedata").innerHTML += "<p> Total of " + files.length + "files , " + totalBytes + "bytes. ";
+     
+}
+window.addEventListener("load",init);
+</script>
+</html>

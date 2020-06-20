@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lange ="en">
+<head>
+<meta charset="UTF-8">
+<title>read file </title>
+<link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+<h1> read file</h1>
+<form action="">
+    <label>Select a File :  </label>
+    <input type="file" name="files" id="openfile" />
+
+    <br>
+    <pre id="filecontents"></pre>
+   
+</form>
+
+ 
+</body>
+<script>
+ document.getElementById("openfile").addEventListener('change', function() {
+      var fr = new FileReader();
+      fr.onload = function() {
+        document.getElementById("filecontents").textContent = this.result;
+      }
+      fr.readAsText(this.files[0]);
+    })
+  
+
+</script>
+</html>

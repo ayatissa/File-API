@@ -1,0 +1,10 @@
+body{
+    font-size: 18px;;
+}
+
+.fileDrop{
+    width: 300px;
+    height: 200px;
+    color: gray;
+    border:10px dashed #9a9a9a
+}
